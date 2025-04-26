@@ -11,7 +11,8 @@ function hideIcons(inputElement) {
     const email = document.getElementById('emailInput').value;
     const password = document.getElementById('passwordInput').value;
   
-    axios.post('backend/login.php', {
+    // Use the correct URL to match your PHP file
+    axios.post('index.php', {
       email: email,
       password: password
     })

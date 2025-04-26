@@ -10,6 +10,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/axios.min.js"></script>
   <script defer src="js/index.js"></script>
+  <link rel="stylesheet" href="css/index.css">
 
 </head>
 
@@ -41,15 +42,12 @@
                   </div>
 
                   <div class="form-outline mb-4" style="position: relative;">
-                    <input type="password" id="passwordInput" class="form-control form-control-lg" onfocus="hideIcons(this)" required />
+                    <input type="password" id="passwordInput" class="form-control form-control-lg" required />
                     <label class="form-label" for="passwordInput">Password</label>
                     <box-icon name="edit-alt" color="#be27a6"></box-icon>
-                    <img
-                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhRJREFUSEvVlLFO21AUhv9jRVTqzMbAArG7MROJKjYP0DW2eIGqlUCiStQO0KEtAkqHVupQqZsTiY0HsK0iMdOlamyhSh0i0W6IEcensh2DDY4Tx5ZC7+R7fe/57n/+cw9hSoOmxMX/DzaljsrM2wQ8BONAdtSDrGyWotiQ9GfE9DEJos+y3Xg6DF4YbFY7GyCO1J0DuAAg+kAC79dt7UUavBDYEvUmg3aCwIw/oP5jqjy48Fz3mIBFf9kDy6u2Zt2GTwxOQEPyE9nWjvwva1FfYoFOg2XiV3JXe1sK+C40VOwJwsoMXV26/coxiBfCREBRbNUsDDaq7RYR3g0C/SXCV2a0BvNzBi6jNAPYlW21WdhjQ+psEvNe5KkHXl51tF+G2F4n4EMcQEyf6k7jeeGqNiX9JZjeXCut9Gv1H2tn/tyoHs4Rud8BzAbpZbxXHHWz8DtOKAV6HvOKrzQGPQEwH9ZSttLoMiOr+jaUBa4pP7XfRaDhG88YVrWzxcTbgy29sqCZYEvU9xgU+ZSEPtLnyaNv1+nN6FC5iitTaQj1PZ0Lbz68LeYuLlNsc2p6S4IOTXUEZuLXSlcLPDZKhI4NLhs6Epze6ibzdKxeHfM4sX/SQhq7VxuSHr3dmzOe0FOcxpesSs3zb2TnyhMsz977BR7mcR5F8b2yrd4RmKp4auDU4ppULoCoCcVD3C+PC4gb++g/krgRLknuK38AAAAASUVORK5CYII="
-                      alt="Base64 Icon" class="icon" />
 
                     <button type="button" id="togglePassword" class="eye-icon" onclick="togglePassword()">
-                      <box-icon id="toggleEye" name="eye" color="#be27a6"></box-icon>
+                      <box-icon id="toggleEye" name="eye" color="#be27a6">See Password</box-icon>
                     </button>
                   </div>
 
@@ -73,6 +71,22 @@
     </div>
   </div>
 
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('passwordInput');
+      const toggleEye = document.getElementById('toggleEye');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleEye.setAttribute('name', 'eye-off');
+        toggleEye.innerHTML = 'Hide Password';
+      } else {
+        passwordInput.type = 'password';
+        toggleEye.setAttribute('name', 'eye');
+        toggleEye.innerHTML = 'See Password';
+      }
+    }
+  </script>
 </body>
 
 </html>
