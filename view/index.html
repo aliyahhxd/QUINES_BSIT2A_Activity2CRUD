@@ -9,11 +9,28 @@
   <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
   <script src="js/bootstrap.min.js"></script>
   <script src="js/axios.min.js"></script>
-
+  <script defer src="js/index.js"></script>
+  
   <style>
-    .form-control:focus + label + box-icon,
-    .form-control:focus + label + box-icon + img {
-      display: none;
+    .form-outline {
+      position: relative;
+    }
+
+    .form-outline box-icon,
+    .form-outline img.icon {
+      position: absolute;
+      top: 15px;
+      width: 20px;
+      height: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-outline box-icon {
+      right: 10px;
+    }
+
+    .form-outline img.icon {
+      left: 10px;
     }
   </style>
 </head>
@@ -34,31 +51,31 @@
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                    <span class="h1 fw-bold mb-0">Barbie!</span>
+                    <span class="h1 fw-bold mb-0">Barbie Girl!</span>
                   </div>
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
-                  <div class="form-outline mb-4 position-relative">
-                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                    <label class="form-label" for="form2Example17">Email address</label>
-                    <box-icon name="edit-alt" color="#be27a6" class="position-absolute" style="top: 15px; right: 10px;"></box-icon>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhRJREFUSEvVlLFO21AUhv9jRVTqzMbAArG7MROJKjYP0DW2eIGqlUCiStQO0KEtAkqHVupQqZsTiY0HsK0iMdOlamyhSh0i0W6IEcensh2DDY4Tx5ZC7+R7fe/57n/+cw9hSoOmxMX/DzaljsrM2wQ8BONAdtSDrGyWotiQ9GfE9DEJos+y3Xg6DF4YbFY7GyCO1J0DuAAg+kAC79dt7UUavBDYEvUmg3aCwIw/oP5jqjy48Fz3mIBFf9kDy6u2Zt2GTwxOQEPyE9nWjvwva1FfYoFOg2XiV3JXe1sK+C40VOwJwsoMXV26/coxiBfCREBRbNUsDDaq7RYR3g0C/SXCV2a0BvNzBi6jNAPYlW21WdhjQ+psEvNe5KkHXl51tF+G2F4n4EMcQEyf6k7jeeGqNiX9JZjeXCut9Gv1H2tn/tyoHs4Rud8BzAbpZbxXHHWz8DtOKAV6HvOKrzQGPQEwH9ZSttLoMiOr+jaUBa4pP7XfRaDhG88YVrWzxcTbgy29sqCZYEvU9xgU+ZSEPtLnyaNv1+nN6FC5iitTaQj1PZ0Lbz68LeYuLlNsc2p6S4IOTXUEZuLXSlcLPDZKhI4NLhs6Epze6ibzdKxeHfM4sX/SQhq7VxuSHr3dmzOe0FOcxpesSs3zb2TnyhMsz977BR7mcR5F8b2yrd4RmKp4auDU4ppULoCoCcVD3C+PC4gb++g/krgRLknuK38AAAAASUVORK5CYII=" alt="Base64 Image" style="position: absolute; top: 15px; left: 10px; width: 20px; height: 20px;" />
+                  <div class="form-outline mb-4">
+                    <input type="email" id="emailInput" class="form-control form-control-lg" onfocus="hideIcons(this)" />
+                    <label class="form-label" for="emailInput">Email address</label>
+                    <box-icon name="edit-alt" color="#be27a6"></box-icon>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhRJREFUSEvVlLFO21AUhv9jRVTqzMbAArG7MROJKjYP0DW2eIGqlUCiStQO0KEtAkqHVupQqZsTiY0HsK0iMdOlamyhSh0i0W6IEcensh2DDY4Tx5ZC7+R7fe/57n/+cw9hSoOmxMX/DzaljsrM2wQ8BONAdtSDrGyWotiQ9GfE9DEJos+y3Xg6DF4YbFY7GyCO1J0DuAAg+kAC79dt7UUavBDYEvUmg3aCwIw/oP5jqjy48Fz3mIBFf9kDy6u2Zt2GTwxOQEPyE9nWjvwva1FfYoFOg2XiV3JXe1sK+C40VOwJwsoMXV26/coxiBfCREBRbNUsDDaq7RYR3g0C/SXCV2a0BvNzBi6jNAPYlW21WdhjQ+psEvNe5KkHXl51tF+G2F4n4EMcQEyf6k7jeeGqNiX9JZjeXCut9Gv1H2tn/tyoHs4Rud8BzAbpZbxXHHWz8DtOKAV6HvOKrzQGPQEwH9ZSttLoMiOr+jaUBa4pP7XfRaDhG88YVrWzxcTbgy29sqCZYEvU9xgU+ZSEPtLnyaNv1+nN6FC5iitTaQj1PZ0Lbz68LeYuLlNsc2p6S4IOTXUEZuLXSlcLPDZKhI4NLhs6Epze6ibzdKxeHfM4sX/SQhq7VxuSHr3dmzOe0FOcxpesSs3zb2TnyhMsz977BR7mcR5F8b2yrd4RmKp4auDU4ppULoCoCcVD3C+PC4gb++g/krgRLknuK38AAAAASUVORK5CYII=" alt="Base64 Icon" class="icon" />
                   </div>
 
-                  <div class="form-outline mb-4 position-relative">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                    <label class="form-label" for="form2Example27">Password</label>
-                    <box-icon name="edit-alt" color="#be27a6" class="position-absolute" style="top: 15px; right: 10px;"></box-icon>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhRJREFUSEvVlLFO21AUhv9jRVTqzMbAArG7MROJKjYP0DW2eIGqlUCiStQO0KEtAkqHVupQqZsTiY0HsK0iMdOlamyhSh0i0W6IEcensh2DDY4Tx5ZC7+R7fe/57n/+cw9hSoOmxMX/DzaljsrM2wQ8BONAdtSDrGyWotiQ9GfE9DEJos+y3Xg6DF4YbFY7GyCO1J0DuAAg+kAC79dt7UUavBDYEvUmg3aCwIw/oP5jqjy48Fz3mIBFf9kDy6u2Zt2GTwxOQEPyE9nWjvwva1FfYoFOg2XiV3JXe1sK+C40VOwJwsoMXV26/coxiBfCREBRbNUsDDaq7RYR3g0C/SXCV2a0BvNzBi6jNAPYlW21WdhjQ+psEvNe5KkHXl51tF+G2F4n4EMcQEyf6k7jeeGqNiX9JZjeXCut9Gv1H2tn/tyoHs4Rud8BzAbpZbxXHHWz8DtOKAV6HvOKrzQGPQEwH9ZSttLoMiOr+jaUBa4pP7XfRaDhG88YVrWzxcTbgy29sqCZYEvU9xgU+ZSEPtLnyaNv1+nN6FC5iitTaQj1PZ0Lbz68LeYuLlNsc2p6S4IOTXUEZuLXSlcLPDZKhI4NLhs6Epze6ibzdKxeHfM4sX/SQhq7VxuSHr3dmzOe0FOcxpesSs3zb2TnyhMsz977BR7mcR5F8b2yrd4RmKp4auDU4ppULoCoCcVD3C+PC4gb++g/krgRLknuK38AAAAASUVORK5CYII=" alt="Base64 Image" style="position: absolute; top: 15px; left: 10px; width: 20px; height: 20px;" />
+                  <div class="form-outline mb-4">
+                    <input type="password" id="passwordInput" class="form-control form-control-lg" onfocus="hideIcons(this)" />
+                    <label class="form-label" for="passwordInput">Password</label>
+                    <box-icon name="edit-alt" color="#be27a6"></box-icon>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhRJREFUSEvVlLFO21AUhv9jRVTqzMbAArG7MROJKjYP0DW2eIGqlUCiStQO0KEtAkqHVupQqZsTiY0HsK0iMdOlamyhSh0i0W6IEcensh2DDY4Tx5ZC7+R7fe/57n/+cw9hSoOmxMX/DzaljsrM2wQ8BONAdtSDrGyWotiQ9GfE9DEJos+y3Xg6DF4YbFY7GyCO1J0DuAAg+kAC79dt7UUavBDYEvUmg3aCwIw/oP5jqjy48Fz3mIBFf9kDy6u2Zt2GTwxOQEPyE9nWjvwva1FfYoFOg2XiV3JXe1sK+C40VOwJwsoMXV26/coxiBfCREBRbNUsDDaq7RYR3g0C/SXCV2a0BvNzBi6jNAPYlW21WdhjQ+psEvNe5KkHXl51tF+G2F4n4EMcQEyf6k7jeeGqNiX9JZjeXCut9Gv1H2tn/tyoHs4Rud8BzAbpZbxXHHWz8DtOKAV6HvOKrzQGPQEwH9ZSttLoMiOr+jaUBa4pP7XfRaDhG88YVrWzxcTbgy29sqCZYEvU9xgU+ZSEPtLnyaNv1+nN6FC5iitTaQj1PZ0Lbz68LeYuLlNsc2p6S4IOTXUEZuLXSlcLPDZKhI4NLhs6Epze6ibzdKxeHfM4sX/SQhq7VxuSHr3dmzOe0FOcxpesSs3zb2TnyhMsz977BR7mcR5F8b2yrd4RmKp4auDU4ppULoCoCcVD3C+PC4gb++g/krgRLknuK38AAAAASUVORK5CYII=" alt="Base64 Icon" class="icon" />
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                    <button class="btn btn-dark btn-lg btn-block" type="button" onclick="loginUser()">Login</button>
                   </div>
 
                   <a class="small text-muted" href="#!">Forgot password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? 
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account?
                     <a href="#!" style="color: #393f81;">Register here</a>
                   </p>
                   <a href="#!" class="small text-muted">Terms of use.</a>
@@ -72,6 +89,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
