@@ -5,12 +5,12 @@ function hideIcons(inputElement) {
   
     if (boxicon) boxicon.style.display = 'none';
     if (img) img.style.display = 'none';
-}
-
-function loginUser() {
+  }
+  
+  function loginUser() {
     const email = document.getElementById('emailInput').value;
     const password = document.getElementById('passwordInput').value;
-
+  
     axios.post('backend/login.php', {
       email: email,
       password: password
@@ -22,9 +22,9 @@ function loginUser() {
       console.error('Error:', error);
       alert('Login failed.');
     });
-}
-
-function togglePassword() {
+  }
+  
+  function togglePassword() {
     const passwordInput = document.getElementById('passwordInput');
     const toggleEye = document.getElementById('toggleEye');
   
@@ -35,4 +35,5 @@ function togglePassword() {
       passwordInput.type = 'password';
       toggleEye.setAttribute('name', 'eye');
     }
-}
+  }
+  
