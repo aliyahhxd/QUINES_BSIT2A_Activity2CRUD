@@ -18,12 +18,13 @@ $data = json_decode(file_get_contents('php://input'), true);
 $email = $conn->real_escape_string($data['email']);
 $password = $conn->real_escape_string($data['password']);
 
-$sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+$sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+$result = $conn->query($sql);
 
-if ($conn->query($sql) === TRUE) {
-    echo json_encode(['message' => 'Login data saved successfully']);
+if ($result->num_rows > 0) {
+    echo json_encode(['message' => 'Login successful']);
 } else {
-    echo json_encode(['message' => 'Failed to save login data']);
+    echo json_encode(['message' => 'Invalid email or password']);
 }
 
 $conn->close();
