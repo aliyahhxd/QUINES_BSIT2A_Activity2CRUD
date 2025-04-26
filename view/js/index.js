@@ -23,4 +23,15 @@ function hideIcons(inputElement) {
       alert('Login failed.');
     });
   }
+  function togglePassword() {
+    const passwordInput = document.getElementById('passwordInput');
+    const toggleEye = document.getElementById('toggleEye');
   
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleEye.setAttribute('name', 'eye-off');
+    } else {
+      passwordInput.type = 'password';
+      toggleEye.setAttribute('name', 'eye');
+    }
+  }  
